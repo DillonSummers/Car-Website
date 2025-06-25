@@ -1,0 +1,410 @@
+* Reset + Base Styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #ffffff;
+  color: #222;
+  line-height: 1.5;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Header */
+.header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  max-width: 100%;
+  background: transparent;
+  padding: 20px 40px;
+  z-index: 3;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap; /* allows wrapping on small screens */
+  box-sizing: border-box;
+}
+
+.header-inner {
+  display: flex;
+  justify-content: space-between; /* Logo left, nav right */
+  align-items: center;
+  padding: 1rem 0;
+  gap: 38rem;
+}
+
+
+.header .logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.header nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2rem;
+  justify-content: flex-end; /* This ensures items within nav align right */
+}
+
+.header nav a {
+  color: #fff;
+  font-weight: 500;
+}
+
+.contact-btn {
+  background-color: #fff;
+  color: #2e1a64;
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  max-width: 100%;
+}
+
+
+
+/* Hero Section */
+.hero {
+  background: url('assets/background.jpg') center/cover no-repeat;
+  padding: 80px 40px 40px;
+  text-align: center;
+  color: white;
+  position: relative;
+}
+
+.hero h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fff;
+  border-radius: 999px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 4px 12px;
+  height: 48px;
+  overflow: hidden;
+}
+
+.search-bar input {
+  flex: 1;
+  border: none;
+  padding: 10px 14px;
+  font-size: 1rem;
+  outline: none;
+  background: transparent;
+  color: #333;
+}
+
+.search-bar button {
+  background: none;
+  border: none;
+  color: #2e1a64;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.filters {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 1.5rem 0;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.filters p {
+  font-size: 1.1rem;
+}
+
+.price-slider {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* aligns text and slider to same left edge */
+  gap: 0.25rem;
+}
+
+.price-slider input {
+  width: 200px;
+  margin: 0; /* reset any unwanted offset */
+}
+
+/* Style the label text */
+.price-slider label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 4px;
+  color: #222;
+  
+}
+
+/* Style the value text inside the label */
+#priceRangeValue {
+  font-weight: 600;
+  color: #2e1a64;
+}
+
+/* Car Grid */
+.car-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 columns */
+  gap: -30rem;
+  row-gap: 2rem;
+  padding: 1rem;
+  padding-top: 2rem;
+  padding-left: 9rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  justify-content: center;
+}
+
+@media (max-width: 900px) {
+  .car-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 columns */
+  }
+}
+
+@media (max-width: 600px) {
+  .car-grid {
+    grid-template-columns: 1fr; /* Stack */
+  }
+}
+
+/* Car Card */
+.car-card {
+  max-width: 60%; /* ↓ from original value */
+  font-size: 0.85rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  overflow: hidden;
+  background: white;
+  transition: transform 0.2s ease;
+  cursor: pointer;
+}
+
+.car-card:hover {
+  transform: translateY(-4px);
+}
+
+.image-wrapper {
+  position: relative;
+}
+
+.image-wrapper img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  max-height: 150px; /* controls vertical space */
+}
+
+/* Base range style */
+input[type="range"] {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 4px;
+  background: #2e1a64;
+  border-radius: 2px;
+  outline: none;
+  margin-top: 10px;
+  margin-bottom: 2px;
+  cursor: pointer;
+}
+
+/* WebKit thumb */
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 20px;
+  width: 20px;
+  background: white;
+  border: 2px solid #2e1a64;
+  border-radius: 50%;
+  margin-top: -1px; /* aligns thumb vertically */
+  cursor: pointer;
+}
+
+/* Firefox thumb */
+input[type="range"]::-moz-range-thumb {
+  height: 20px;
+  width: 20px;
+  background: white;
+  border: 2px solid #2e1a64;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* Firefox track */
+input[type="range"]::-moz-range-track {
+  background: #2e1a64;
+  height: 4px;
+  border-radius: 2px;
+}
+
+.hover-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  color: #2e1a64;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 1.50rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.image-wrapper:hover .hover-overlay {
+  opacity: 1;
+}
+
+/* Car Details */
+.car-details {
+  padding: 10px;
+}
+
+.car-details h3 {
+  font-size: .90rem;
+  font-weight: 600;
+  color: #2e1a64;
+  margin-bottom: 4px;
+}
+
+.car-details ul {
+  font-size: 0.80rem;
+  line-height: 1.4;
+  margin-bottom: 8px;
+}
+
+.car-details .price {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #2e1a64;
+}
+
+.car-details ul li {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 3px;
+}
+
+.car-details ul li img {
+  width: 16px;
+  height: 16px;
+}
+
+.price {
+  font-weight: bold;
+  color: #2e1a64;
+  font-size: 0.9rem;
+}
+
+/* Tinted Background for Full Hero Area */
+.hero {
+  position: relative;
+  background: url('assets/Screenshot 2025-06-24 142809.png') center/cover no-repeat;
+  padding: 140px 40px 80px;
+  color: white;
+  text-align: center;
+  z-index: 0;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgba(19, 3, 47, 0.72); /* soft purple overlay */
+  z-index: 1;
+}
+
+.hero h1,
+.search-bar {
+  position: relative;
+  z-index: 1;
+}
+
+/* Make header transparent so it blends into hero */
+.header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+  background: transparent;
+  color: white;
+  padding: 20px 140px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: -4rem -5rem;
+  padding-left: 22rem;
+}
+
+.header nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.header nav b {
+  color: white;
+  margin-left: 5rem;
+}
+
+.header nav c {
+  color: white;
+  margin-left: 5rem;
+}
+
+.contact-btn {
+  background-color: #fff;
+  color: #2e1a64;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 999px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 700;
+  font-size: 1.2rem;
+  letter-spacing: 0.5px;
+  text-transform: lowercase;
+  color: white;
+}
+
+.logo-icon {
+  height: 24px;
+  width: auto;
+}
+
