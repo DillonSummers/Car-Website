@@ -65,15 +65,14 @@ a {
 }
 
 .contact-btn {
-  background-color: #fff;
-  color: #2e1a64;
+  background-color: #2e1a64;
+  color: #fff;
   padding: 8px 16px;
   border-radius: 999px;
   font-weight: 600;
   font-size: 0.9rem;
   max-width: 100%;
 }
-
 
 
 /* Hero Section */
@@ -210,22 +209,28 @@ a {
   border: none;
   padding: 15px 25px;
   font-size: 16px;
-  border-radius: 50px 0 0 50px;
+  background: transparent;
   outline: none;
+  border-radius: 50px 0 0 50px; /* Rounded left side */
 }
 
 .search-bar input::placeholder {
-  color: #aaa;
+  color: #999;
 }
 
 .search-bar button {
-  background-color: #5a28a0;
+  background-color: #2e1a64; /* Purple search button */
   color: #fff;
   border: none;
-  padding: 15px 20px;
-  border-radius: 0 50px 50px 0;
+  padding: 15px; /* Equal padding to make it circular */
+  border-radius: 50%; /* Circular button */
+  width: 50px; /* Explicit width for circular shape */
+  height: 50px; /* Explicit height for circular shape */
   cursor: pointer;
-  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0px; /* No extra margin */
   transition: background-color 0.3s ease;
 }
 
@@ -520,8 +525,8 @@ input[type="range"]::-moz-range-track {
 }
 
 .contact-btn {
-  background-color: #fff;
-  color: #2e1a64;
+  background-color: #2e1a64;
+  color: #fff;
   padding: 8px 16px;
   border: none;
   border-radius: 999px;
@@ -529,15 +534,30 @@ input[type="range"]::-moz-range-track {
   cursor: pointer;
 }
 
+/* Styling for "Home" link - set to a lighter purple */
+.header nav .home-link {
+  color: #9370DB; /* This is a medium purple. Adjust as needed. */
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+/* Styling for "Find your car" link - set to a darker grey */
+.header nav .find-car-link {
+  color: #555; /* Dark grey */
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
 .logo-btn {
   background: none;
   border: none;
-  color: #fff;
+  color: white;
   cursor: pointer;
   display: flex;
   align-items: center;
   font-size: 1.2rem;
   font-weight: 700;
+  margin-left: 5rem;
 }
 
 .logo-btn img {
