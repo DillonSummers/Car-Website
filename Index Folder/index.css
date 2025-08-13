@@ -1,4 +1,4 @@
-* Reset + Base Styles */
+/* Reset + Base Styles */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -92,38 +92,151 @@ a {
 
 .search-bar {
   display: flex;
+  justify-content: center;
   align-items: center;
-  justify-content: space-between;
-  background: #fff;
-  border-radius: 999px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-  max-width: 500px;
-  margin: 0 auto;
-  padding: 4px 12px;
-  height: 48px;
-  overflow: hidden;
+  margin: 0 auto 50px;
+  max-width: 600px;
+  background-color: #f0f0f0; /* Lighter background for the search bar */
+  border-radius: 50px;
+  box-shadow: none; /* No shadow to match the image */
+}
+
+.search-bar input::placeholder {
+  color: #999;
 }
 
 .search-bar input {
-  flex: 1;
+  flex-grow: 1;
   border: none;
-  padding: 10px 14px;
-  font-size: 1rem;
-  outline: none;
+  padding: 15px 25px;
+  font-size: 16px;
   background: transparent;
-  color: #333;
+  outline: none;
 }
 
 .search-bar button {
-  background: none;
+  background-color: #2e1a64;
+  color: #fff;
   border: none;
-  color: #2e1a64;
-  font-size: 1.2rem;
+  padding: 15px 25px;
+  border-radius: 50%; /* Changed to a circle to match the image */
+  width: 50px; /* Adjust width to make it a perfect circle */
+  height: 50px; /* Adjust height to make it a perfect circle */
   cursor: pointer;
-  padding: 0 8px;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-right: 5px; /* Add margin to separate from input */
+  transition: background-color 0.3s ease;
+}
+
+.contact-btn {
+  background-color: #5a28a0;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 50px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Header */
+.header {
+  width: 100%;
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.logo-btn img {
+  height: 30px;
+}
+
+.header .contact-link {
+  font-weight: 500;
+  color: #222;
+}
+
+/* Hero Section */
+.hero {
+  text-align: center;
+  padding: 80px 20px 0;
+}
+
+.hero-title {
+  font-size: 48px;
+  font-weight: 700;
+  color: #2e1a64;
+  margin-bottom: 10px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.2;
+}
+
+.hero-subtitle {
+  font-size: 16px;
+  color: #555;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-top: 0;
+  margin-bottom: 30px;
+}
+
+.search-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 50px;
+  max-width: 600px;
+  background-color: #fff;
+  border-radius: 50px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.search-bar input {
+  flex-grow: 1;
+  border: none;
+  padding: 15px 25px;
+  font-size: 16px;
+  border-radius: 50px 0 0 50px;
+  outline: none;
+}
+
+.search-bar input::placeholder {
+  color: #aaa;
+}
+
+.search-bar button {
+  background-color: #5a28a0;
+  color: #fff;
+  border: none;
+  padding: 15px 20px;
+  border-radius: 0 50px 50px 0;
+  cursor: pointer;
+  font-size: 20px;
+  transition: background-color 0.3s ease;
+}
+
+/* Hero Image */
+.hero-image {
+  width: 100%;
+  max-width: 800px;
+  margin-top: 20px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .filters {
@@ -326,6 +439,16 @@ input[type="range"]::-moz-range-track {
 }
 
 /* Tinted Background for Full Hero Area */
+/* First one */
+.hero {
+  background: url('assets/background.jpg') center/cover no-repeat;
+  padding: 80px 40px 40px;
+  text-align: center;
+  color: white;
+  position: relative;
+}
+
+/* Second one later in the file */
 .hero {
   position: relative;
   background: url('assets/Screenshot 2025-06-24 142809.png') center/cover no-repeat;
@@ -347,6 +470,20 @@ input[type="range"]::-moz-range-track {
 .search-bar {
   position: relative;
   z-index: 1;
+}
+
+/* Remove hero background only on America page */
+.america-page .hero {
+  background: none;      /* removes background image */
+}
+
+.america-page .hero::before {
+  content: none;         /* removes overlay if present */
+}
+
+.america-page .hero h1,
+.america-page .search-bar {
+  color: #222;           /* optional: change text color since hero is plain now */
 }
 
 /* Make header transparent so it blends into hero */
@@ -392,19 +529,18 @@ input[type="range"]::-moz-range-track {
   cursor: pointer;
 }
 
-.logo {
+.logo-btn {
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  font-weight: 700;
   font-size: 1.2rem;
-  letter-spacing: 0.5px;
-  text-transform: lowercase;
-  color: white;
+  font-weight: 700;
 }
 
-.logo-icon {
-  height: 24px;
-  width: auto;
+.logo-btn img {
+  margin-right: 0.5rem;
 }
 

@@ -11,20 +11,39 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <!-- Header -->
+
+<!-- Header -->
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>America - Blinker</title>
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+<!-- Header -->
 <header class="header">
   <div class="container header-inner">
-    <div class="logo">
+    <!-- Logo as a button linking to america.html -->
+    <button class="logo-btn" onclick="window.location.href='america.html'">
       <img src="assets/Screenshot 2025-06-24 145208.png" alt="Logo" class="logo-icon" />
       blinker
-    </div>
+    </button>
+
     <nav>
       <a href="#">Home</a>
-      <a href="#">Find your car</a>
+      <a href="browse.html">Find your car</a>
       <button class="contact-btn">Contact</button>
     </nav>
   </div>
 </header>
+
+<section id="browseCarsContent">
+  <!-- Browse Cars search, filters, and car grid here -->
+</section>
+
+<script src="browse.js"></script>
+
 
 <!-- Hero -->
 <section class="hero">

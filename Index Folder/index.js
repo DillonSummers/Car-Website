@@ -1,8 +1,9 @@
+// ====== Search & Filter Logic ======
 const searchInput = document.getElementById('searchInput');
 const priceSlider = document.getElementById('priceRange');
 const priceValue = document.getElementById('priceRangeValue');
 const carCards = document.querySelectorAll('.car-card');
-const carGrid = document.getElementById('carGrid'); // Needed for adding OMDb cards
+const carGrid = document.getElementById('carGrid');
 
 const MAX_VISIBLE = 6;
 const MAX_PRICE = 100000;
@@ -82,3 +83,16 @@ async function updateFilter() {
 searchInput.addEventListener('input', updateFilter);
 priceSlider.addEventListener('input', updateFilter);
 updateFilter();
+
+// ====== Show Australia Page on Logo Click ======
+const blinkerLogo = document.getElementById('blinkerLogo');
+const browseCarsContent = document.getElementById('browseCarsContent');
+const australiaPage = document.getElementById('australiaPage');
+
+if (blinkerLogo && browseCarsContent && australiaPage) {
+  blinkerLogo.addEventListener('click', function (e) {
+    e.preventDefault();
+    browseCarsContent.style.display = 'none';
+    australiaPage.style.display = 'block';
+  });
+}
