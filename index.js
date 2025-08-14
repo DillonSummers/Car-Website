@@ -1,98 +1,71 @@
-// ====== Search & Filter Logic ======
+// ====== Search & Filter Logic for Movies ======
 const searchInput = document.getElementById('searchInput');
-const priceSlider = document.getElementById('priceRange');
-const priceValue = document.getElementById('priceRangeValue');
-const carCards = document.querySelectorAll('.car-card');
-const carGrid = document.getElementById('carGrid');
+const searchBtn = document.getElementById('searchBtn');
+const movieGrid = document.getElementById('moviesGrid');
+const ratingSlider = document.getElementById('ratingRange');
+const ratingValue = document.getElementById('ratingRangeValue');
 
 const MAX_VISIBLE = 6;
-const MAX_PRICE = 100000;
 const API_KEY = 'db4a7367';
 
+// Fetch movies from OMDb API
 async function fetchOMDbResults(query) {
+  if (!query) return [];
   const url = `https://www.omdbapi.com/?apikey=${API_KEY}&s=${encodeURIComponent(query)}`;
-  const res = await fetch(url);
-  const data = await res.json();
-  return data.Search || [];
+  try {
+    const res = await fetch(url);
+    const data = await res.json();
+    return data.Search || [];
+  } catch (err) {
+    console.error('OMDb fetch error:', err);
+    return [];
+  }
 }
 
-function createCardFromOMDb(movie) {
+// Create movie card (OMDb)
+function createMovieCard(movie) {
   const card = document.createElement('div');
-  card.className = 'car-card omdb-card';
+  card.className = 'movie-card';
   card.innerHTML = `
     <div class="image-wrapper">
-      <img src="${movie.Poster}" alt="${movie.Title}" />
+      <img src="${movie.Poster !== 'N/A' ? movie.Poster : 'placeholder.png'}" alt="${movie.Title}" />
       <div class="hover-overlay">More info →</div>
     </div>
-    <div class="car-details">
+    <div class="movie-details">
       <h3>${movie.Title}</h3>
       <ul>
         <li><i class="fa-solid fa-calendar"></i> ${movie.Year}</li>
         <li><i class="fa-solid fa-film"></i> ${movie.Type}</li>
       </ul>
-      <p class="price">N/A</p>
     </div>
   `;
   return card;
 }
 
-async function updateFilter() {
-  const searchTerm = searchInput.value.toLowerCase().trim();
-  const minPrice = parseInt(priceSlider.value, 10);
+// Main function to update movie results
+async function updateMovies() {
+  const searchTerm = searchInput.value.trim();
+  const minRating = parseInt(ratingSlider.value, 10);
+  ratingValue.textContent = `${minRating} to 10`;
 
-  priceValue.textContent = `$${minPrice.toLocaleString()} to $${MAX_PRICE.toLocaleString()}`;
+  movieGrid.innerHTML = ''; // clear previous results
+  if (!searchTerm) return;
 
-  // Remove previous OMDb results
-  document.querySelectorAll('.omdb-card').forEach(el => el.remove());
+  const results = await fetchOMDbResults(searchTerm);
 
-  let shownCount = 0;
-
-  // Filter local car cards
-  carCards.forEach(card => {
-    const title = card.querySelector('h3').textContent.toLowerCase();
-    const price = parseInt(card.dataset.price, 10);
-
-    const matchesSearch = title.includes(searchTerm);
-    const matchesPrice = price >= minPrice && price <= MAX_PRICE;
-
-    let shouldShow = false;
-    if (searchTerm !== '') {
-      shouldShow = matchesSearch;
-    } else {
-      shouldShow = matchesPrice;
-    }
-
-    if (shouldShow && shownCount < MAX_VISIBLE) {
-      card.style.display = 'block';
-      shownCount++;
-    } else {
-      card.style.display = 'none';
-    }
-  });
-
-  // If fewer than MAX_VISIBLE shown, fetch from OMDb to fill the rest
-  if (shownCount < MAX_VISIBLE && searchTerm !== '') {
-    const results = await fetchOMDbResults(searchTerm);
-    results.slice(0, MAX_VISIBLE - shownCount).forEach(movie => {
-      const card = createCardFromOMDb(movie);
-      carGrid.appendChild(card);
-    });
-  }
-}
-
-searchInput.addEventListener('input', updateFilter);
-priceSlider.addEventListener('input', updateFilter);
-updateFilter();
-
-// ====== Show Australia Page on Logo Click ======
-const blinkerLogo = document.getElementById('blinkerLogo');
-const browseCarsContent = document.getElementById('browseCarsContent');
-const australiaPage = document.getElementById('australiaPage');
-
-if (blinkerLogo && browseCarsContent && australiaPage) {
-  blinkerLogo.addEventListener('click', function (e) {
-    e.preventDefault();
-    browseCarsContent.style.display = 'none';
-    australiaPage.style.display = 'block';
+  results.slice(0, MAX_VISIBLE).forEach(movie => {
+    const card = createMovieCard(movie);
+    movieGrid.appendChild(card);
   });
 }
+
+// Event listeners
+searchInput.addEventListener('input', updateMovies);
+searchBtn.addEventListener('click', updateMovies);
+searchInput.addEventListener('keyup', e => {
+  if (e.key === 'Enter') updateMovies();
+});
+ratingSlider.addEventListener('input', updateMovies);
+
+// Initial load (optional)
+updateMovies();
