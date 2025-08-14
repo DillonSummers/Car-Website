@@ -1,65 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Blinker - Browse Movies</title>
-  <link rel="stylesheet" href="index.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blinker - Browse Movies</title>
+    <link rel="stylesheet" href="index.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
-<body> 
+<body>
 
 <!-- Header -->
 <header class="header">
-  <div class="container header-inner">
-    <!-- Logo button -->
-    <button class="logo-btn" onclick="window.location.href='america.html'">
-      <img src="Index Folder/assets/Screenshot 2025-06-24 145208.png" alt="Logo" class="logo-icon" />
-      blinker
-    </button>
+    <div class="container header-inner">
+        <button class="logo-btn" onclick="window.location.href='america.html'">
+            <img src="Index Folder/assets/Screenshot 2025-06-24 145208.png" alt="Logo" class="logo-icon" />
+            blinker
+        </button>
 
-    <nav>
-      <a href="#">Home</a>
-      <a href="browse.html">Find your car</a>
-      <button class="contact-btn">Contact</button>
-      <!-- Optional: Movies button like the logo button -->
-    </nav>
-  </div>
+        <nav>
+            <a href="#" class="nav-link home-link">Home</a>
+            <a href="browse.html" class="nav-link find-car-link">Find your movie</a>
+            <button class="contact-btn">Contact</button>
+        </nav>
+    </div>
 </header>
 
 <!-- Hero / Search -->
 <section class="hero">
-  <h1>Browse our Movies</h1>
-  <div class="hero-controls" style="display: flex; align-items: center; gap: 10px;">
-
-    <!-- Search bar wrapper -->
-    <div class="search-bar" style="display: flex; align-items: center; gap: 5px; width: 100%; max-width: 700px; background: white; border-radius: 50px; padding: 5px;">
-      <input type="text" id="searchInput" placeholder="Search by Movie Title or Keyword" 
-             style="flex: 1; border: none; outline: none; padding: 10px 15px; border-radius: 50px; font-size: 16px;" />
-      <button id="searchBtn" style="background: #2e1c63; border: none; color: white; padding: 10px 15px; border-radius: 50%; cursor: pointer;">
-        <i class="fa-solid fa-magnifying-glass"></i>
-      </button>
+    <h1>Browse our Movies</h1>
+    <div class="hero-controls">
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Search by Movie Title or Keyword" />
+            <button id="searchBtn">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+        </div>
     </div>
-
-  </div>
 </section>
 
 <!-- Filters Section -->
 <section class="filters container">
-  <p><strong>Search results: </strong></p>
-  <!-- Example filter: Rating, Genre, etc. -->
-  <div class="price-slider">
-    <label for="ratingRange">Rating: <span id="ratingRangeValue">0 to 10</span></label>
-    <input type="range" id="ratingRange" min="0" max="10" value="0" />
-  </div>
+    <p><strong>Search results: </strong></p>
+    <div class="price-slider">
+        <label for="ratingRange">Rating: <span id="ratingRangeValue">0 to 10</span></label>
+        <input type="range" id="ratingRange" min="0" max="10" value="0" />
+    </div>
 </section>
 
 <!-- Movie Grid -->
 <section class="moviesGrid container" id="moviesGrid">
-  <!-- No movie cards initially; can be populated dynamically -->
+    <!-- Example Movie Card (to be dynamically populated by JS) -->
+    <div class="movie-card">
+        <div class="movie-image-wrapper">
+            <img src="https://placehold.co/150x220/E0E0E0/333333?text=Movie+Poster" alt="Movie Poster" class="movie-poster">
+        </div>
+        <div class="movie-details">
+            <h3 class="movie-title">Movie Title Example</h3>
+            <p class="movie-year"><i class="fas fa-calendar-alt"></i> 2023</p>
+            <p class="movie-type"><i class="fas fa-film"></i> movie</p>
+            <p class="movie-rating">N/A</p>
+        </div>
+    </div>
+    <!-- More movie cards will go here -->
 </section>
 
 <script src="browse.js"></script>

@@ -564,3 +564,80 @@ input[type="range"]::-moz-range-track {
   margin-right: 0.5rem;
 }
 
+/* Movie Grid Styles */
+.moviesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive grid columns */
+  gap: 20px; /* Spacing between cards */
+  padding: 20px 0;
+  margin-top: 20px;
+}
+
+.movie-card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  overflow: hidden;
+  text-align: center; /* Center content within the card */
+  transition: transform 0.2s ease;
+  cursor: pointer;
+}
+
+.movie-card:hover {
+  transform: translateY(-5px); /* Slight lift on hover */
+}
+
+.movie-image-wrapper {
+  width: 100%;
+  height: 250px; /* Fixed height for image wrapper */
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.movie-poster {
+  width: auto;
+  height: 100%; /* Fill height and maintain aspect ratio */
+  object-fit: contain; /* Ensure the entire image is visible within its box */
+  max-width: 100%;
+}
+
+.movie-details {
+  padding: 15px;
+}
+
+.movie-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #2e1a64; /* Purple for movie titles */
+  margin-bottom: 5px;
+  height: 40px; /* Fixed height to prevent layout shifts for multi-line titles */
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Limit title to 2 lines */
+  -webkit-box-orient: vertical;
+}
+
+.movie-year,
+.movie-type,
+.movie-rating {
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Center icons and text */
+  gap: 5px;
+}
+
+.movie-year i,
+.movie-type i {
+  color: #2e1a64; /* Purple icon color */
+  font-size: 0.8em;
+}
+
+.movie-rating {
+  font-weight: 600;
+  color: #2e1a64; /* Purple for rating (e.g., N/A) */
+}
