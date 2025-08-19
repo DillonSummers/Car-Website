@@ -1,4 +1,4 @@
-// ====== Search & Filter Logic for Movies ======
+// ====== Search & Filter Logic for Movies with Rating Sort ======
 const searchInput = document.getElementById('searchInput');
 const searchBtn = document.getElementById('searchBtn');
 const movieGrid = document.getElementById('moviesGrid');
@@ -8,13 +8,14 @@ const ratingValue = document.getElementById('ratingRangeValue');
 const MAX_VISIBLE = 6;
 const API_KEY = 'db4a7367';
 
-// Fetch movies from OMDb API
+// Fetch search results (basic info only)
 async function fetchOMDbResults(query) {
   if (!query) return [];
   const url = `https://www.omdbapi.com/?apikey=${API_KEY}&s=${encodeURIComponent(query)}`;
   try {
     const res = await fetch(url);
     const data = await res.json();
+    if (data.Response === "False") return [];
     return data.Search || [];
   } catch (err) {
     console.error('OMDb fetch error:', err);
@@ -22,13 +23,27 @@ async function fetchOMDbResults(query) {
   }
 }
 
-// Create movie card (OMDb)
+// Fetch full details for a single movie (to get imdbRating)
+async function fetchMovieDetails(imdbID) {
+  const url = `https://www.omdbapi.com/?apikey=${API_KEY}&i=${imdbID}`;
+  try {
+    const res = await fetch(url);
+    const data = await res.json();
+    return data;
+  } catch (err) {
+    console.error('OMDb detail fetch error:', err);
+    return null;
+  }
+}
+
+// Create movie card
 function createMovieCard(movie) {
+  const ratingText = movie.imdbRating && movie.imdbRating !== "N/A" ? movie.imdbRating : "N/A";
   const card = document.createElement('div');
   card.className = 'movie-card';
   card.innerHTML = `
     <div class="image-wrapper">
-      <img src="${movie.Poster !== 'N/A' ? movie.Poster : 'placeholder.png'}" alt="${movie.Title}" />
+      <img src="${movie.Poster !== 'N/A' ? movie.Poster : 'https://placehold.co/150x220'}" alt="${movie.Title}" />
       <div class="hover-overlay">More info →</div>
     </div>
     <div class="movie-details">
@@ -36,6 +51,7 @@ function createMovieCard(movie) {
       <ul>
         <li><i class="fa-solid fa-calendar"></i> ${movie.Year}</li>
         <li><i class="fa-solid fa-film"></i> ${movie.Type}</li>
+        <li><i class="fa-solid fa-star"></i> Rating: ${ratingText}</li>
       </ul>
     </div>
   `;
@@ -44,19 +60,45 @@ function createMovieCard(movie) {
 
 // Main function to update movie results
 async function updateMovies() {
-  const searchTerm = searchInput.value.trim();
+  const searchTerm = searchInput.value.trim() || "Batman"; // default query
   const minRating = parseInt(ratingSlider.value, 10);
   ratingValue.textContent = `${minRating} to 10`;
 
-  movieGrid.innerHTML = ''; // clear previous results
-  if (!searchTerm) return;
-
+  movieGrid.innerHTML = ''; // clear results
   const results = await fetchOMDbResults(searchTerm);
 
-  results.slice(0, MAX_VISIBLE).forEach(movie => {
+  if (results.length === 0) {
+    movieGrid.innerHTML = `<p>No results found for "${searchTerm}".</p>`;
+    return;
+  }
+
+  // Fetch details for each movie (to get rating)
+  const detailedResults = await Promise.all(
+    results.map(async movie => {
+      const details = await fetchMovieDetails(movie.imdbID);
+      return details;
+    })
+  );
+
+  // Filter by slider rating (only numeric ratings)
+  const filtered = detailedResults.filter(m => {
+    const r = parseFloat(m.imdbRating);
+    return !isNaN(r) && r >= minRating;
+  });
+
+  // Sort by rating (highest first)
+  filtered.sort((a, b) => parseFloat(b.imdbRating) - parseFloat(a.imdbRating));
+
+  // Display top N
+  filtered.slice(0, MAX_VISIBLE).forEach(movie => {
     const card = createMovieCard(movie);
     movieGrid.appendChild(card);
   });
+
+  // If nothing matched rating filter
+  if (filtered.length === 0) {
+    movieGrid.innerHTML = `<p>No movies with rating ≥ ${minRating}.</p>`;
+  }
 }
 
 // Event listeners
@@ -67,5 +109,5 @@ searchInput.addEventListener('keyup', e => {
 });
 ratingSlider.addEventListener('input', updateMovies);
 
-// Initial load (optional)
+// Initial load
 updateMovies();
