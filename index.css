@@ -404,8 +404,8 @@ input[type="range"]::-moz-range-track {
 /* Car Details */
 .car-details {
   padding: 10px;
-}
-
+} 
+ 
 .car-details h3 {
   font-size: .90rem;
   font-weight: 600;
