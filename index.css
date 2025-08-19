@@ -446,7 +446,7 @@ input[type="range"]::-moz-range-track {
 /* Tinted Background for Full Hero Area */
 /* First one */
 .hero {
-  background: url('Index Folder/assets/background.jpg') center/cover no-repeat;
+  background: url('Index Folder/assets/Screenshot\ 2025-06-24\ 142809.png') center/cover no-repeat;
   padding: 80px 40px 40px;
   text-align: center;
   color: white;
@@ -454,12 +454,13 @@ input[type="range"]::-moz-range-track {
 }
 
 /* Second one later in the file */
-.hero {
-  position: relative;
-  background: url('Index Folder/assets/Screenshot 2025-06-24 142809.png') center/cover no-repeat;
+/* Hero override for movies.html */
+.movies-page .hero {
+  background: url('Index Folder/assets/Screenshot\ 2025-08-19\ 115037.png') center/cover no-repeat;
   padding: 140px 40px 80px;
   color: white;
   text-align: center;
+  position: relative;
   z-index: 0;
 }
 
